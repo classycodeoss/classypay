@@ -3,3 +3,8 @@ cmake-build-debug/
 merged.hex
 CMakeEnv.cmake
 .idea/
+
+# app stuff
+UserInterfaceState.xcuserstate
+build
+xcuserdata/

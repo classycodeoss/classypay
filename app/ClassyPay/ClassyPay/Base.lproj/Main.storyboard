@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="ArialRoundedMTBold.ttf">
+            <string>ArialRoundedMTBold</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="ClassyPay" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="classycrab" translatesAutoresizingMaskIntoConstraints="NO" id="UaZ-HK-fbk">
+                                <rect key="frame" x="20" y="60" width="80" height="80"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="80" id="7ub-fg-ygz"/>
+                                    <constraint firstAttribute="height" constant="80" id="U4i-cR-pmG"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ClassyPay" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m4J-t7-3V2">
+                                <rect key="frame" x="155.5" y="60" width="199.5" height="46.5"/>
+                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="40"/>
+                                <color key="textColor" red="0.1176470588" green="0.1960784314" blue="0.43921568630000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="iBeacon Proximity Demo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L1U-uj-GyU">
+                                <rect key="frame" x="169" y="114" width="186" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="naZ-Ca-cD3">
+                                <rect key="frame" x="20" y="180" width="335" height="90"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4.50 CHF" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XiY-G1-DKz">
+                                        <rect key="frame" x="20" y="40" width="133.5" height="35"/>
+                                        <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="30"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Terminal 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BdS-OI-QKi">
+                                        <rect key="frame" x="20" y="10" width="86.5" height="20"/>
+                                        <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="17"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hCg-Q1-AEY">
+                                        <rect key="frame" x="235" y="15.5" width="80" height="60"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="80" id="dzn-r2-j2h"/>
+                                            <constraint firstAttribute="height" constant="60" id="eVS-hk-cf4"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="30"/>
+                                        <state key="normal" title="PAY">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="onPayButtonTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="khf-0b-Iek"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.1176470588" green="0.1960784314" blue="0.43921568630000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="90" id="6Io-08-5fq"/>
+                                    <constraint firstItem="XiY-G1-DKz" firstAttribute="leading" secondItem="naZ-Ca-cD3" secondAttribute="leading" constant="20" id="G8X-qy-ln6"/>
+                                    <constraint firstItem="BdS-OI-QKi" firstAttribute="leading" secondItem="naZ-Ca-cD3" secondAttribute="leading" constant="20" id="Mci-Y3-BS3"/>
+                                    <constraint firstItem="hCg-Q1-AEY" firstAttribute="centerY" secondItem="naZ-Ca-cD3" secondAttribute="centerY" id="YTn-65-xm3"/>
+                                    <constraint firstAttribute="trailing" secondItem="hCg-Q1-AEY" secondAttribute="trailing" constant="20" id="aww-fk-chI"/>
+                                    <constraint firstItem="XiY-G1-DKz" firstAttribute="top" secondItem="BdS-OI-QKi" secondAttribute="bottom" constant="10" id="fX9-zY-B7t"/>
+                                    <constraint firstItem="BdS-OI-QKi" firstAttribute="top" secondItem="naZ-Ca-cD3" secondAttribute="top" constant="10" id="gXm-L4-Wla"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstItem="m4J-t7-3V2" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="40" id="3gw-Od-Md5"/>
+                            <constraint firstItem="naZ-Ca-cD3" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="7Fe-Ig-I2S"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="L1U-uj-GyU" secondAttribute="trailing" constant="20" id="9Jw-uh-RKa"/>
+                            <constraint firstItem="naZ-Ca-cD3" firstAttribute="top" secondItem="UaZ-HK-fbk" secondAttribute="bottom" constant="40" id="Byv-7w-pwZ"/>
+                            <constraint firstItem="L1U-uj-GyU" firstAttribute="top" secondItem="m4J-t7-3V2" secondAttribute="bottom" constant="8" id="I5Q-7j-MK1"/>
+                            <constraint firstItem="UaZ-HK-fbk" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="40" id="IRa-b6-Im4"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="naZ-Ca-cD3" secondAttribute="trailing" constant="20" id="NcY-2M-EA8"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="m4J-t7-3V2" secondAttribute="trailing" constant="20" id="uXB-Mv-BHR"/>
+                            <constraint firstItem="UaZ-HK-fbk" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="und-AZ-tau"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <connections>
+                        <outlet property="amountLabel" destination="XiY-G1-DKz" id="aqw-O6-eQV"/>
+                        <outlet property="payButton" destination="hCg-Q1-AEY" id="u1j-Cc-c8E"/>
+                        <outlet property="payView" destination="naZ-Ca-cD3" id="FlY-mN-lqt"/>
+                        <outlet property="terminalLabel" destination="BdS-OI-QKi" id="Hrn-2O-DyW"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="117.59999999999999" y="118.29085457271366"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="classycrab" width="147" height="148"/>
+    </resources>
+</document>
