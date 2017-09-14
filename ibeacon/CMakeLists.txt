@@ -9,6 +9,7 @@ nRF5x_setup()
 nRF5x_addAppTimer()
 nRF5x_addAppScheduler()
 nRF5x_addBLEAdvertising()
+nRF5x_addAppButton()
 
 include_directories(".")
 list(APPEND SOURCE_FILES "main.c")

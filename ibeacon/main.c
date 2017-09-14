@@ -7,10 +7,12 @@
 #include "nrf_sdh_ble.h"
 #include "ble_advdata.h"
 #include "app_scheduler.h"
+#include "app_timer.h"
 #include "nrf_log.h"
 #include "nrf_log_ctrl.h"
 #include "nrf_log_default_backends.h"
 #include "nrf_drv_gpiote.h"
+#include "app_button.h"
 
 #define LED_PIN                         25
 #define BUTTON_PIN                      24
@@ -41,8 +43,7 @@ static uint8_t              m_beacon_info[APP_BEACON_INFO_LENGTH] = {
         APP_MINOR_VALUE,
         APP_MEASURED_RSSI
 };
-
-static ble_advdata_manuf_data_t manuf_specific_data;
+static ble_advdata_manuf_data_t m_manuf_specific_data;
 
 /**@brief Callback function for asserts in the SoftDevice.
  *
@@ -59,6 +60,26 @@ void assert_nrf_callback(uint16_t line_num, const uint8_t *p_file_name) {
     app_error_handler(DEAD_BEEF, line_num, p_file_name);
 }
 
+static void led_init() {
+    ret_code_t err_code;
+
+    err_code = nrf_drv_gpiote_init();
+    APP_ERROR_CHECK(err_code);
+
+    nrf_drv_gpiote_out_config_t out_config = GPIOTE_CONFIG_OUT_SIMPLE(false);
+    err_code = nrf_drv_gpiote_out_init(LED_PIN, &out_config);
+    nrf_gpio_cfg_output(LED_PIN);
+    APP_ERROR_CHECK(err_code);
+}
+
+static void set_led(int state) {
+    if (state) {
+        nrf_drv_gpiote_out_set(LED_PIN);
+    } else {
+        nrf_drv_gpiote_out_clear(LED_PIN);
+    }
+}
+
 /**@brief Function for initializing the Advertising functionality.
  *
  * @details Encodes the required advertising data and passes it to the stack.
@@ -70,16 +91,16 @@ static void advertising_init(void) {
     ble_advdata_t *scan_response_data = NULL; // no scan response
     uint8_t flags = BLE_GAP_ADV_FLAG_BR_EDR_NOT_SUPPORTED;
 
-    manuf_specific_data.company_identifier = APP_COMPANY_IDENTIFIER;
-    manuf_specific_data.data.p_data = (uint8_t *) m_beacon_info;
-    manuf_specific_data.data.size = APP_BEACON_INFO_LENGTH;
+    m_manuf_specific_data.company_identifier = APP_COMPANY_IDENTIFIER;
+    m_manuf_specific_data.data.p_data = (uint8_t *) m_beacon_info;
+    m_manuf_specific_data.data.size = APP_BEACON_INFO_LENGTH;
 
     // Build and set advertising data.
     memset(&advdata, 0, sizeof(advdata));
 
     advdata.name_type = BLE_ADVDATA_NO_NAME;
     advdata.flags = flags;
-    advdata.p_manuf_specific_data = &manuf_specific_data;
+    advdata.p_manuf_specific_data = &m_manuf_specific_data;
 
     m_beacon_info[MINOR_OFFSET_IN_BEACON_INFO] = (uint8_t)((m_minor >> 16) & 0xff);
     m_beacon_info[MINOR_OFFSET_IN_BEACON_INFO + 1] = (uint8_t)(m_minor & 0xff);
@@ -103,8 +124,7 @@ static void advertising_start(void) {
     NRF_LOG_INFO("Start advertising: %d", m_minor);
     err_code = sd_ble_gap_adv_start(&m_adv_params, APP_BLE_CONN_CFG_TAG);
     APP_ERROR_CHECK(err_code);
-
-    nrf_drv_gpiote_out_set(LED_PIN);
+    set_led(1);
 }
 
 static void advertising_stop(void) {
@@ -114,7 +134,7 @@ static void advertising_stop(void) {
     APP_ERROR_CHECK(err_code);
 
     NRF_LOG_INFO("Stop advertising");
-    nrf_drv_gpiote_out_clear(LED_PIN);
+    set_led(0);
 }
 
 static void ble_stack_init(void) {
@@ -134,7 +154,7 @@ static void ble_stack_init(void) {
     APP_ERROR_CHECK(err_code);
 
     // Reduce transmission power to the minimum
-    err_code = sd_ble_gap_tx_power_set(-40);
+    err_code = sd_ble_gap_tx_power_set(-16);
     APP_ERROR_CHECK(err_code);
 
     // Retrieve MAC address for logging
@@ -148,37 +168,43 @@ static void log_init(void) {
     NRF_LOG_DEFAULT_BACKENDS_INIT();
 }
 
-void button_press_handler(nrf_drv_gpiote_pin_t pin, nrf_gpiote_polarity_t action) {
-    if (!m_advertising) {
-        m_advertising = 1;
-        m_minor++;
-        advertising_init(); // reinitialize to cycle minor
-        advertising_start();
-    } else {
-        m_advertising = 0;
-        advertising_stop();
+static void timer_init(void) {
+    ret_code_t err_code = app_timer_init();
+    APP_ERROR_CHECK(err_code);
+}
+
+void button_press_handler(uint8_t pin_no, uint8_t button_action) {
+    if (pin_no == BUTTON_PIN && button_action == APP_BUTTON_RELEASE) {
+        if (!m_advertising) {
+            m_advertising = 1;
+            m_minor++;
+            advertising_init(); // reinitialize to cycle minor
+            advertising_start();
+        } else {
+            m_advertising = 0;
+            advertising_stop();
+        }
     }
 }
 
-static void gpio_init() {
+static app_button_cfg_t m_button_cfg[] = {
+        {
+                .pin_no = BUTTON_PIN,
+                .active_state = APP_BUTTON_ACTIVE_HIGH,
+                .pull_cfg = NRF_GPIO_PIN_PULLUP,
+                .button_handler = button_press_handler
+        }
+};
+
+static void button_init() {
     ret_code_t err_code;
-
-    err_code = nrf_drv_gpiote_init();
+    err_code = app_button_init(m_button_cfg, 1, APP_TIMER_TICKS(50));
     APP_ERROR_CHECK(err_code);
 
-    nrf_drv_gpiote_out_config_t out_config = GPIOTE_CONFIG_OUT_SIMPLE(false);
-    err_code = nrf_drv_gpiote_out_init(LED_PIN, &out_config);
+    err_code = app_button_enable();
     APP_ERROR_CHECK(err_code);
-
-    nrf_drv_gpiote_in_config_t in_config = GPIOTE_CONFIG_IN_SENSE_LOTOHI(true);
-    in_config.pull = NRF_GPIO_PIN_PULLUP;
-    err_code = nrf_drv_gpiote_in_init(BUTTON_PIN, &in_config, button_press_handler);
-    APP_ERROR_CHECK(err_code);
-
-    nrf_drv_gpiote_in_event_enable(BUTTON_PIN, true);
-    nrf_gpio_cfg_input(BUTTON_PIN, NRF_GPIO_PIN_PULLUP);
-    nrf_gpio_cfg_output(LED_PIN);
 }
+
 
 void sd_state_evt_handler(nrf_sdh_state_evt_t state, void *p_context) {
     switch (state) {
@@ -201,11 +227,13 @@ NRF_SDH_STATE_OBSERVER(m_state_observer, OBSERVER_PRIO) = {
 
 int main(void) {
     log_init();
+    timer_init();
+    led_init();
     ble_stack_init();
     advertising_init();
-    gpio_init();
+    button_init();
 
-    nrf_drv_gpiote_out_clear(LED_PIN);
+    set_led(0);
 
     uint8_t *const addr = m_addr.addr;
     NRF_LOG_INFO("Init complete, MAC address: %02x:%02x:%02x:%02x:%02x:%02x",
