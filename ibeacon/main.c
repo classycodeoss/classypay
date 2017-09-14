@@ -31,6 +31,11 @@
 #define MINOR_OFFSET_IN_BEACON_INFO     20
 #define DEAD_BEEF                       0xDEADBEEF                        /**< Value used as error code on stack dump, can be used to identify stack location on stack unwind. */
 
+#define DURATION_TO_ADVERTISE_MSECS     5000
+#define LED_BLINK_INTERVAL_MSECS        100
+#define MIN_MINOR                       1
+#define MAX_MINOR                       20
+
 static ble_gap_adv_params_t m_adv_params;                                 /**< Parameters to be passed to the stack when starting advertising. */
 static uint8_t              m_advertising = 0;
 static uint16_t             m_minor = 0;
@@ -44,6 +49,10 @@ static uint8_t              m_beacon_info[APP_BEACON_INFO_LENGTH] = {
         APP_MEASURED_RSSI
 };
 static ble_advdata_manuf_data_t m_manuf_specific_data;
+
+APP_TIMER_DEF(m_advertising_stop_timer);
+APP_TIMER_DEF(m_blink_led_timer);
+static uint8_t m_led_state = 0;
 
 /**@brief Callback function for asserts in the SoftDevice.
  *
@@ -72,7 +81,7 @@ static void led_init() {
     APP_ERROR_CHECK(err_code);
 }
 
-static void set_led(int state) {
+static void set_led(uint8_t state) {
     if (state) {
         nrf_drv_gpiote_out_set(LED_PIN);
     } else {
@@ -118,23 +127,46 @@ static void advertising_init(void) {
     m_adv_params.timeout = 0;       // Never time out
 }
 
-static void advertising_start(void) {
-    ret_code_t err_code;
-
-    NRF_LOG_INFO("Start advertising: %d", m_minor);
-    err_code = sd_ble_gap_adv_start(&m_adv_params, APP_BLE_CONN_CFG_TAG);
-    APP_ERROR_CHECK(err_code);
-    set_led(1);
-}
-
 static void advertising_stop(void) {
     ret_code_t err_code;
 
     err_code = sd_ble_gap_adv_stop();
     APP_ERROR_CHECK(err_code);
 
-    NRF_LOG_INFO("Stop advertising");
+    NRF_LOG_INFO("... stopped advertising");
     set_led(0);
+
+    app_timer_stop(m_blink_led_timer);
+}
+
+static void advertising_stop_timer_handler(void* p_context) {
+    m_advertising = 0;
+    advertising_stop();
+}
+
+static void blink_led_timer(void* p_context) {
+    m_led_state = m_led_state ? 0 : 1;
+    set_led(m_led_state);
+}
+
+static void advertising_start(void) {
+    ret_code_t err_code;
+
+    NRF_LOG_INFO("Starting to advertise...");
+    err_code = sd_ble_gap_adv_start(&m_adv_params, APP_BLE_CONN_CFG_TAG);
+    APP_ERROR_CHECK(err_code);
+    set_led(1);
+
+    // start timer to stop advertising after a short time
+    err_code = app_timer_create(&m_advertising_stop_timer, APP_TIMER_MODE_SINGLE_SHOT, advertising_stop_timer_handler);
+    APP_ERROR_CHECK(err_code);
+    err_code = app_timer_start(m_advertising_stop_timer, APP_TIMER_TICKS(DURATION_TO_ADVERTISE_MSECS), NULL);
+    APP_ERROR_CHECK(err_code);
+
+    err_code = app_timer_create(&m_blink_led_timer, APP_TIMER_MODE_REPEATED, blink_led_timer);
+    APP_ERROR_CHECK(err_code);
+    err_code = app_timer_start(m_blink_led_timer, APP_TIMER_TICKS(LED_BLINK_INTERVAL_MSECS), NULL);
+    APP_ERROR_CHECK(err_code);
 }
 
 static void ble_stack_init(void) {
@@ -154,7 +186,7 @@ static void ble_stack_init(void) {
     APP_ERROR_CHECK(err_code);
 
     // Reduce transmission power to the minimum
-    err_code = sd_ble_gap_tx_power_set(-16);
+    err_code = sd_ble_gap_tx_power_set(-40);
     APP_ERROR_CHECK(err_code);
 
     // Retrieve MAC address for logging
@@ -178,11 +210,19 @@ void button_press_handler(uint8_t pin_no, uint8_t button_action) {
         if (!m_advertising) {
             m_advertising = 1;
             m_minor++;
+            //m_addr.addr[5] = m_minor;
+            //m_addr.addr_type = BLE_GAP_ADDR_TYPE_RANDOM_PRIVATE_NON_RESOLVABLE;
+            ret_code_t err_code = sd_ble_gap_addr_set((const ble_gap_addr_t *)(&m_addr));
+            APP_ERROR_CHECK(err_code);
+
+            NRF_LOG_INFO("Rotated MAC address to: %02x:%02x:%02x:%02x:%02x:%02x",
+                         m_addr.addr[5], m_addr.addr[4], m_addr.addr[3], m_addr.addr[2], m_addr.addr[1], m_addr.addr[0]);
+            if (m_minor > MAX_MINOR) {
+                m_minor = MIN_MINOR;
+            }
+            NRF_LOG_INFO("Rotating minor to: %d", m_minor);
             advertising_init(); // reinitialize to cycle minor
             advertising_start();
-        } else {
-            m_advertising = 0;
-            advertising_stop();
         }
     }
 }
