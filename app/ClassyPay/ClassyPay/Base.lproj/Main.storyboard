@@ -9,11 +9,6 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="ArialRoundedMTBold.ttf">
-            <string>ArialRoundedMTBold</string>
-        </array>
-    </customFonts>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -31,78 +26,71 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ClassyPay" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m4J-t7-3V2">
-                                <rect key="frame" x="155.5" y="60" width="199.5" height="46.5"/>
-                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="40"/>
+                                <rect key="frame" x="237.5" y="60" width="117.5" height="29"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
                                 <color key="textColor" red="0.1176470588" green="0.1960784314" blue="0.43921568630000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="iBeacon Proximity Demo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L1U-uj-GyU">
-                                <rect key="frame" x="169" y="114" width="186" height="21"/>
+                                <rect key="frame" x="169" y="96.5" width="186" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="naZ-Ca-cD3">
-                                <rect key="frame" x="20" y="180" width="335" height="90"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4.50 CHF" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XiY-G1-DKz">
-                                        <rect key="frame" x="20" y="40" width="133.5" height="35"/>
-                                        <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="30"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Terminal 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BdS-OI-QKi">
-                                        <rect key="frame" x="20" y="10" width="86.5" height="20"/>
-                                        <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="17"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hCg-Q1-AEY">
-                                        <rect key="frame" x="235" y="15.5" width="80" height="60"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="80" id="dzn-r2-j2h"/>
-                                            <constraint firstAttribute="height" constant="60" id="eVS-hk-cf4"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="30"/>
-                                        <state key="normal" title="PAY">
-                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="onPayButtonTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="khf-0b-Iek"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="17S-la-xHU">
+                                <rect key="frame" x="20" y="160" width="335" height="140"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="140" id="lia-jU-HWQ"/>
+                                </constraints>
+                                <mutableString key="text">This app demonstrates lock screen interactions triggered by iBeacon proximity.  You need to grant access to location and notification permissions for this demo to be functional. After granting the permissions, exit the app and get close to an appropriately configured iBeacon.</mutableString>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VMX-CF-x0e">
+                                <rect key="frame" x="20" y="617" width="335" height="30"/>
                                 <color key="backgroundColor" red="0.1176470588" green="0.1960784314" blue="0.43921568630000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="90" id="6Io-08-5fq"/>
-                                    <constraint firstItem="XiY-G1-DKz" firstAttribute="leading" secondItem="naZ-Ca-cD3" secondAttribute="leading" constant="20" id="G8X-qy-ln6"/>
-                                    <constraint firstItem="BdS-OI-QKi" firstAttribute="leading" secondItem="naZ-Ca-cD3" secondAttribute="leading" constant="20" id="Mci-Y3-BS3"/>
-                                    <constraint firstItem="hCg-Q1-AEY" firstAttribute="centerY" secondItem="naZ-Ca-cD3" secondAttribute="centerY" id="YTn-65-xm3"/>
-                                    <constraint firstAttribute="trailing" secondItem="hCg-Q1-AEY" secondAttribute="trailing" constant="20" id="aww-fk-chI"/>
-                                    <constraint firstItem="XiY-G1-DKz" firstAttribute="top" secondItem="BdS-OI-QKi" secondAttribute="bottom" constant="10" id="fX9-zY-B7t"/>
-                                    <constraint firstItem="BdS-OI-QKi" firstAttribute="top" secondItem="naZ-Ca-cD3" secondAttribute="top" constant="10" id="gXm-L4-Wla"/>
+                                    <constraint firstAttribute="height" constant="30" id="dsK-fy-zr8"/>
                                 </constraints>
-                            </view>
+                                <state key="normal" title="Acquire Permissions">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </state>
+                                <connections>
+                                    <action selector="onRequestPermissionButtonTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="sMa-PD-Os3"/>
+                                </connections>
+                            </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="10r-tM-5nE">
+                                <rect key="frame" x="20" y="320" width="335" height="276"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="textColor" red="0.26666666666666666" green="0.26666666666666666" blue="0.26666666666666666" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="17S-la-xHU" secondAttribute="trailing" constant="20" id="0mX-gi-S36"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="10r-tM-5nE" secondAttribute="trailing" constant="20" id="0on-S5-96G"/>
+                            <constraint firstItem="17S-la-xHU" firstAttribute="top" secondItem="UaZ-HK-fbk" secondAttribute="bottom" constant="20" id="2Kn-bx-lB8"/>
                             <constraint firstItem="m4J-t7-3V2" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="40" id="3gw-Od-Md5"/>
-                            <constraint firstItem="naZ-Ca-cD3" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="7Fe-Ig-I2S"/>
+                            <constraint firstItem="10r-tM-5nE" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="5vw-Op-JUn"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="L1U-uj-GyU" secondAttribute="trailing" constant="20" id="9Jw-uh-RKa"/>
-                            <constraint firstItem="naZ-Ca-cD3" firstAttribute="top" secondItem="UaZ-HK-fbk" secondAttribute="bottom" constant="40" id="Byv-7w-pwZ"/>
                             <constraint firstItem="L1U-uj-GyU" firstAttribute="top" secondItem="m4J-t7-3V2" secondAttribute="bottom" constant="8" id="I5Q-7j-MK1"/>
                             <constraint firstItem="UaZ-HK-fbk" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="40" id="IRa-b6-Im4"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="naZ-Ca-cD3" secondAttribute="trailing" constant="20" id="NcY-2M-EA8"/>
+                            <constraint firstItem="10r-tM-5nE" firstAttribute="top" secondItem="17S-la-xHU" secondAttribute="bottom" constant="20" id="KUH-Le-80a"/>
+                            <constraint firstItem="17S-la-xHU" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="aqK-M3-KcB"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="VMX-CF-x0e" secondAttribute="bottom" constant="20" id="fGR-Vo-9MQ"/>
+                            <constraint firstItem="VMX-CF-x0e" firstAttribute="top" secondItem="10r-tM-5nE" secondAttribute="bottom" constant="21" id="tko-ec-L7j"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="m4J-t7-3V2" secondAttribute="trailing" constant="20" id="uXB-Mv-BHR"/>
                             <constraint firstItem="UaZ-HK-fbk" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="und-AZ-tau"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="VMX-CF-x0e" secondAttribute="trailing" constant="20" id="wFR-5J-86S"/>
+                            <constraint firstItem="VMX-CF-x0e" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="wYF-gZ-47n"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
-                        <outlet property="amountLabel" destination="XiY-G1-DKz" id="aqw-O6-eQV"/>
-                        <outlet property="payButton" destination="hCg-Q1-AEY" id="u1j-Cc-c8E"/>
-                        <outlet property="payView" destination="naZ-Ca-cD3" id="FlY-mN-lqt"/>
-                        <outlet property="terminalLabel" destination="BdS-OI-QKi" id="Hrn-2O-DyW"/>
+                        <outlet property="statusView" destination="10r-tM-5nE" id="LMd-hO-orp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

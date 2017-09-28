@@ -6,17 +6,12 @@ import UIKit
 import CoreLocation
 import UserNotifications
 
-protocol BeaconManagerDelegate {
-    
-    func beaconManagerMonitoringIsEnabled(enabled: Bool)
-    func beaconManagerDidDetectCloseProximity(to beacon: CLBeaconRegion)
-}
-
 class BeaconManager: NSObject {
-    static let uuid = UUID(uuidString: "33013f7f-cb46-4db6-b4be-542c310a81eb")!
-    static let major: UInt16 = 204
     
-    var delegate: BeaconManagerDelegate?
+    // iBeacon configuration: this must match your beacon setup
+    let proximityUuid = UUID(uuidString: "33013f7f-cb46-4db6-b4be-542c310a81eb")!
+    let major: UInt16 = 204
+    let minorRange: CountableRange<UInt16> = 1..<21
     let locationManager = CLLocationManager()
     
     override init() {
@@ -24,49 +19,43 @@ class BeaconManager: NSObject {
         locationManager.delegate = self
         locationManager.pausesLocationUpdatesAutomatically = false
         
-        let payAction = UNNotificationAction(identifier: "pay", title: "Pay", options: .foreground)
-        let cancelAction = UNNotificationAction(identifier: "cancel", title: "Cancel", options: .foreground)
-        
-        let category = UNNotificationCategory(identifier: "payment", actions: [payAction, cancelAction],
-                                              intentIdentifiers: [], options: [])
-        let categories: Set = [ category ]
+        let initiateAction = UNNotificationAction(identifier: "initiate", title: "Pay", options: [])
+        let cancelAction = UNNotificationAction(identifier: "cancel", title: "Cancel",
+                                                options: [ .destructive ])
+        let initiateCategory = UNNotificationCategory(identifier: "initiate", actions: [initiateAction, cancelAction],
+                                                      intentIdentifiers: [], options: [])
+        let categories: Set = [ initiateCategory ]
         UNUserNotificationCenter.current().setNotificationCategories(categories)
-        UNUserNotificationCenter.current().delegate = self
     }
     
-    fileprivate func processBeacon(beacon: CLBeaconRegion) {
-        let notificationCenter = UNUserNotificationCenter.current()
-        notificationCenter.getNotificationSettings { (notificationSettings) in
-            if notificationSettings.authorizationStatus == .authorized {
-                let content = UNMutableNotificationContent()
-                content.title = "ClassyPay"
-                content.body = "Pay 4.50 CHF at Terminal \(beacon.minor!)"
-                content.sound = UNNotificationSound.default()
-                content.categoryIdentifier = "payment"
-                content.userInfo["proximityUUID"] = beacon.proximityUUID.uuidString
-                content.userInfo["minor"] = beacon.minor
-                content.userInfo["major"] = beacon.major
-                let notificationId = UUID().uuidString
-                let request = UNNotificationRequest(identifier: notificationId, content: content, trigger: nil)
-                notificationCenter.add(request, withCompletionHandler: { (error) in
-                    if let error = error {
-                        print("Failed to schedule notification: \(error)")
+    fileprivate func notifyBeaconDetected(beacon: CLBeaconRegion) {
+        AppDelegate.instance.backendService.lookupAction(proximityUuid: beacon.proximityUUID,
+                                                         major: beacon.major!.intValue,
+                                                         minor: beacon.minor!.intValue) { (error, actionUuid) in
+            if let actionUuid = actionUuid {
+                let notificationCenter = UNUserNotificationCenter.current()
+                notificationCenter.getNotificationSettings { (notificationSettings) in
+                    if notificationSettings.authorizationStatus == .authorized {
+                        let content = UNMutableNotificationContent()
+                        content.title = "Action requested"
+                        content.body = "Perform action?"
+                        content.sound = UNNotificationSound.default()
+                        content.categoryIdentifier = "initiate"
+                        content.userInfo["actionUuid"] = actionUuid
+                        let request = UNNotificationRequest(identifier: actionUuid, content: content, trigger: nil)
+                        UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
                     } else {
-                        print("Scheduled notification")
+                        print("Not authorized to show notification")
                     }
-                })
-            } else {
-                print("Not authorized to show notification")
+                }
+            } else if let error = error {
+                print("Error occurred: \(error)")
             }
         }
     }
     
     func isAuthorizerForBeaconMonitoring() -> Bool {
         return CLLocationManager.authorizationStatus() != .denied
-    }
-    
-    func requestAuthorizationForBeaconMonitoring() {
-        locationManager.requestAlwaysAuthorization()
     }
 }
 
@@ -77,28 +66,24 @@ extension BeaconManager: CLLocationManagerDelegate {
             for monitoredRegion in locationManager.monitoredRegions {
                 locationManager.stopMonitoring(for: monitoredRegion)
             }
-            for minor: UInt16 in 1...20 {
-                let beaconRegion = CLBeaconRegion(proximityUUID: BeaconManager.uuid, major: BeaconManager.major,
+            
+            for minor in minorRange {
+                let beaconRegion = CLBeaconRegion(proximityUUID: proximityUuid, major: major,
                                                   minor: minor, identifier: "region\(minor)")
                 beaconRegion.notifyEntryStateOnDisplay = true
                 locationManager.startMonitoring(for: beaconRegion)
+                print("Subscribing to proximityUUID: \(proximityUuid) major: \(major) minor: \(minor)")
             }
             print("Started monitoring for beacon regions")
-            delegate?.beaconManagerMonitoringIsEnabled(enabled: true)
         } else {
             print("Not authorized for beacon region monitoring")
-            delegate?.beaconManagerMonitoringIsEnabled(enabled: false)
         }
     }
     
     func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
         if let beaconRegion = region as? CLBeaconRegion {
             print("ENTER beacon region: \(beaconRegion)")
-            if UIApplication.shared.applicationState == .active {
-                delegate?.beaconManagerDidDetectCloseProximity(to: beaconRegion)
-            } else {
-                processBeacon(beacon: beaconRegion)
-            }
+            self.notifyBeaconDetected(beacon: beaconRegion)
         }
     }
     
@@ -106,14 +91,5 @@ extension BeaconManager: CLLocationManagerDelegate {
         if let beaconRegion = region as? CLBeaconRegion {
             print("EXIT beacon region: \(beaconRegion)")
         }
-    }
-}
-
-extension BeaconManager: UNUserNotificationCenterDelegate {
-    
-    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification,
-                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        let content = notification.request.content
-        delegate?.beaconManagerDidDetectCloseProximity(to: content.userInfo["beaconRegion"] as! CLBeaconRegion)
     }
 }

@@ -7,15 +7,54 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A820F73C1F7A87D80010F9F9 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A820F73B1F7A87D80010F9F9 /* UserNotifications.framework */; };
+		A820F73E1F7A87D80010F9F9 /* UserNotificationsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A820F73D1F7A87D80010F9F9 /* UserNotificationsUI.framework */; };
+		A820F7411F7A87D80010F9F9 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A820F7401F7A87D80010F9F9 /* NotificationViewController.swift */; };
+		A820F7441F7A87D80010F9F9 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A820F7421F7A87D80010F9F9 /* MainInterface.storyboard */; };
+		A820F7481F7A87D80010F9F9 /* ClassyPayNCE.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = A820F7391F7A87D80010F9F9 /* ClassyPayNCE.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		A820F74D1F7A8ADC0010F9F9 /* BackendService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F355EA1F7549CE0012EEB6 /* BackendService.swift */; };
+		A820F7511F7AAD150010F9F9 /* NotificationAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A820F7501F7AAD150010F9F9 /* NotificationAssets.xcassets */; };
 		A894E9B21F6AB78100FE6EDA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A894E9B11F6AB78100FE6EDA /* AppDelegate.swift */; };
 		A894E9B41F6AB78100FE6EDA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A894E9B31F6AB78100FE6EDA /* ViewController.swift */; };
 		A894E9B71F6AB78100FE6EDA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A894E9B51F6AB78100FE6EDA /* Main.storyboard */; };
 		A894E9B91F6AB78100FE6EDA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A894E9B81F6AB78100FE6EDA /* Assets.xcassets */; };
 		A894E9BC1F6AB78100FE6EDA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A894E9BA1F6AB78100FE6EDA /* LaunchScreen.storyboard */; };
 		A894E9C61F6AB7CC00FE6EDA /* BeaconManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A894E9C51F6AB7CC00FE6EDA /* BeaconManager.swift */; };
+		A8F355EB1F7549CE0012EEB6 /* BackendService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F355EA1F7549CE0012EEB6 /* BackendService.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		A820F7461F7A87D80010F9F9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A894E9A61F6AB78100FE6EDA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A820F7381F7A87D80010F9F9;
+			remoteInfo = ClassyPayNCE;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		A820F74C1F7A87D80010F9F9 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				A820F7481F7A87D80010F9F9 /* ClassyPayNCE.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		A820F7391F7A87D80010F9F9 /* ClassyPayNCE.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ClassyPayNCE.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		A820F73B1F7A87D80010F9F9 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
+		A820F73D1F7A87D80010F9F9 /* UserNotificationsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotificationsUI.framework; path = System/Library/Frameworks/UserNotificationsUI.framework; sourceTree = SDKROOT; };
+		A820F7401F7A87D80010F9F9 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
+		A820F7431F7A87D80010F9F9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		A820F7451F7A87D80010F9F9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A820F7501F7AAD150010F9F9 /* NotificationAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = NotificationAssets.xcassets; sourceTree = "<group>"; };
 		A894E9AE1F6AB78100FE6EDA /* ClassyPay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ClassyPay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A894E9B11F6AB78100FE6EDA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A894E9B31F6AB78100FE6EDA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -24,9 +63,19 @@
 		A894E9BB1F6AB78100FE6EDA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A894E9BD1F6AB78100FE6EDA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A894E9C51F6AB7CC00FE6EDA /* BeaconManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeaconManager.swift; sourceTree = "<group>"; };
+		A8F355EA1F7549CE0012EEB6 /* BackendService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackendService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		A820F7361F7A87D80010F9F9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A820F73E1F7A87D80010F9F9 /* UserNotificationsUI.framework in Frameworks */,
+				A820F73C1F7A87D80010F9F9 /* UserNotifications.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A894E9AB1F6AB78100FE6EDA /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -37,10 +86,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A820F73A1F7A87D80010F9F9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A820F73B1F7A87D80010F9F9 /* UserNotifications.framework */,
+				A820F73D1F7A87D80010F9F9 /* UserNotificationsUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A820F73F1F7A87D80010F9F9 /* ClassyPayNCE */ = {
+			isa = PBXGroup;
+			children = (
+				A820F7401F7A87D80010F9F9 /* NotificationViewController.swift */,
+				A820F7421F7A87D80010F9F9 /* MainInterface.storyboard */,
+				A820F7451F7A87D80010F9F9 /* Info.plist */,
+				A820F7501F7AAD150010F9F9 /* NotificationAssets.xcassets */,
+			);
+			path = ClassyPayNCE;
+			sourceTree = "<group>";
+		};
 		A894E9A51F6AB78100FE6EDA = {
 			isa = PBXGroup;
 			children = (
 				A894E9B01F6AB78100FE6EDA /* ClassyPay */,
+				A820F73F1F7A87D80010F9F9 /* ClassyPayNCE */,
+				A820F73A1F7A87D80010F9F9 /* Frameworks */,
 				A894E9AF1F6AB78100FE6EDA /* Products */,
 			);
 			sourceTree = "<group>";
@@ -49,6 +120,7 @@
 			isa = PBXGroup;
 			children = (
 				A894E9AE1F6AB78100FE6EDA /* ClassyPay.app */,
+				A820F7391F7A87D80010F9F9 /* ClassyPayNCE.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -59,6 +131,7 @@
 				A894E9B11F6AB78100FE6EDA /* AppDelegate.swift */,
 				A894E9B31F6AB78100FE6EDA /* ViewController.swift */,
 				A894E9C51F6AB7CC00FE6EDA /* BeaconManager.swift */,
+				A8F355EA1F7549CE0012EEB6 /* BackendService.swift */,
 				A894E9B51F6AB78100FE6EDA /* Main.storyboard */,
 				A894E9B81F6AB78100FE6EDA /* Assets.xcassets */,
 				A894E9BA1F6AB78100FE6EDA /* LaunchScreen.storyboard */,
@@ -70,6 +143,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		A820F7381F7A87D80010F9F9 /* ClassyPayNCE */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A820F74B1F7A87D80010F9F9 /* Build configuration list for PBXNativeTarget "ClassyPayNCE" */;
+			buildPhases = (
+				A820F7351F7A87D80010F9F9 /* Sources */,
+				A820F7361F7A87D80010F9F9 /* Frameworks */,
+				A820F7371F7A87D80010F9F9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ClassyPayNCE;
+			productName = ClassyPayNCE;
+			productReference = A820F7391F7A87D80010F9F9 /* ClassyPayNCE.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		A894E9AD1F6AB78100FE6EDA /* ClassyPay */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = A894E9C01F6AB78100FE6EDA /* Build configuration list for PBXNativeTarget "ClassyPay" */;
@@ -77,10 +167,12 @@
 				A894E9AA1F6AB78100FE6EDA /* Sources */,
 				A894E9AB1F6AB78100FE6EDA /* Frameworks */,
 				A894E9AC1F6AB78100FE6EDA /* Resources */,
+				A820F74C1F7A87D80010F9F9 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				A820F7471F7A87D80010F9F9 /* PBXTargetDependency */,
 			);
 			name = ClassyPay;
 			productName = ClassyPay;
@@ -97,6 +189,10 @@
 				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = "Classy Code GmbH";
 				TargetAttributes = {
+					A820F7381F7A87D80010F9F9 = {
+						CreatedOnToolsVersion = 9.0;
+						ProvisioningStyle = Automatic;
+					};
 					A894E9AD1F6AB78100FE6EDA = {
 						CreatedOnToolsVersion = 9.0;
 						ProvisioningStyle = Automatic;
@@ -122,11 +218,21 @@
 			projectRoot = "";
 			targets = (
 				A894E9AD1F6AB78100FE6EDA /* ClassyPay */,
+				A820F7381F7A87D80010F9F9 /* ClassyPayNCE */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		A820F7371F7A87D80010F9F9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A820F7441F7A87D80010F9F9 /* MainInterface.storyboard in Resources */,
+				A820F7511F7AAD150010F9F9 /* NotificationAssets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A894E9AC1F6AB78100FE6EDA /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -140,10 +246,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		A820F7351F7A87D80010F9F9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A820F74D1F7A8ADC0010F9F9 /* BackendService.swift in Sources */,
+				A820F7411F7A87D80010F9F9 /* NotificationViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A894E9AA1F6AB78100FE6EDA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A8F355EB1F7549CE0012EEB6 /* BackendService.swift in Sources */,
 				A894E9C61F6AB7CC00FE6EDA /* BeaconManager.swift in Sources */,
 				A894E9B41F6AB78100FE6EDA /* ViewController.swift in Sources */,
 				A894E9B21F6AB78100FE6EDA /* AppDelegate.swift in Sources */,
@@ -152,7 +268,23 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		A820F7471F7A87D80010F9F9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A820F7381F7A87D80010F9F9 /* ClassyPayNCE */;
+			targetProxy = A820F7461F7A87D80010F9F9 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
+		A820F7421F7A87D80010F9F9 /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A820F7431F7A87D80010F9F9 /* Base */,
+			);
+			name = MainInterface.storyboard;
+			sourceTree = "<group>";
+		};
 		A894E9B51F6AB78100FE6EDA /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -172,6 +304,36 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		A820F7491F7A87D80010F9F9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7SRSGJYJU7;
+				INFOPLIST_FILE = ClassyPayNCE/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.classycode.ClassyPay.ClassyPayNCE;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A820F74A1F7A87D80010F9F9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7SRSGJYJU7;
+				INFOPLIST_FILE = ClassyPayNCE/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.classycode.ClassyPay.ClassyPayNCE;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		A894E9BE1F6AB78100FE6EDA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -282,7 +444,9 @@
 		A894E9C11F6AB78100FE6EDA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7SRSGJYJU7;
 				INFOPLIST_FILE = ClassyPay/Info.plist;
@@ -291,14 +455,16 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.classycode.ClassyPay;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
 		A894E9C21F6AB78100FE6EDA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7SRSGJYJU7;
 				INFOPLIST_FILE = ClassyPay/Info.plist;
@@ -307,13 +473,22 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.classycode.ClassyPay;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		A820F74B1F7A87D80010F9F9 /* Build configuration list for PBXNativeTarget "ClassyPayNCE" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A820F7491F7A87D80010F9F9 /* Debug */,
+				A820F74A1F7A87D80010F9F9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		A894E9A91F6AB78100FE6EDA /* Build configuration list for PBXProject "ClassyPay" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
